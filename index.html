@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Reference VS Copy</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script>
+      // start with strings, numbers and booleans
+      let age = 100;
+      let age2 = age;
+      console.log(age, age2);
+      age = 200;
+      console.log(age, age2);
+
+      let name = "Haris";
+      let name2 = name;
+      console.log(name, name2);
+      name = "Zamzam";
+      console.log(name, name2);
+
+      // Let's say we have an array
+      const players = ["Wes", "Sarah", "Ryan", "Poppy"];
+      const team = players;
+      console.log("players: " + players);
+      players[3] = "zamzam";
+      console.log("team: " + team);
+
+      // and we want to make a copy of it.
+
+      // You might think we can just do something like this:
+
+      // however what happens when we update that array?
+
+      // now here is the problem!
+
+      // oh no - we have edited the original array too!
+
+      // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+      // So, how do we fix this? We take a copy instead!
+
+      // one way
+      var team2 = players.slice();
+      team2[3] = "shazmin";
+      console.log("team2: " + team2);
+      console.log("players: " + players);
+
+      // or create a new array and concat the old one in
+      const team3 = [].concat(players);
+      team3[3] = "usman";
+      console.log("team3: " + team3);
+      console.log("players: " + players);
+
+      // or use the new ES6 Spread
+      const team4 = [...players];
+      team4[3] = "ali";
+      console.log("team4: " + team4);
+      console.log("players: " + players);
+
+      const team5 = Array.from(players);
+      team5[3] = "muskan";
+      console.log("team5: " + team5);
+      console.log("players: " + players);
+
+      // now when we update it, the original one isn't changed
+
+      // The same thing goes for objects, let's say we have a person object
+
+      // with Objects
+      const person = {
+        name: "Wes Bos",
+        age: 80,
+      };
+
+      // and think we make a copy:
+
+      const captain = person;
+      captain.number = 99;
+      console.log("captain" + captain);
+
+      // how do we take a copy instead?
+      const cap2 = Object.assign({}, person, { number: 10, age: 12 });
+      console.log(`cap2`);
+      console.log(cap2);
+
+      // We will hopefully soon see the object ...spread
+
+      // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+      const haris = {
+        firstName: "Sheikh Haris",
+        lastName: "Ud-Din Ansari",
+        age: 20,
+        friends: { st_friend: "Usman", nd_friend: "Zamzam" },
+      };
+      console.clear();
+      console.log("haris");
+      console.log(haris);
+
+      const Iqra = Object.assign({}, haris);
+      Iqra.firstName = "Erum";
+      Iqra.friends.nd_friend = "Kamran";
+      console.log("Iqra");
+      console.log(Iqra);
+
+      const tariqMasood = JSON.parse(JSON.stringify(haris));
+      haris.friends.nd_friend = "Saqib";
+      console.log("tariq Masood");
+      console.log(tariqMasood);
+    </script>
+    <div class="landscape">
+      <div class="mountain"></div>
+      <div class="mountain mountain-2"></div>
+      <div class="mountain mountain-3"></div>
+      <div class="sun-container sun-container-1"></div>
+      <div class="sun-container">
+        <div class="sun"></div>
+      </div>
+      <div class="cloud"></div>
+      <div class="cloud cloud-1"></div>
+      <div class="sun-container sun-container-reflection">
+        <div class="sun"></div>
+      </div>
+      <div class="light"></div>
+      <div class="light light-1"></div>
+      <div class="light light-2"></div>
+      <div class="light light-3"></div>
+      <div class="light light-4"></div>
+      <div class="light light-5"></div>
+      <div class="light light-6"></div>
+      <div class="light light-7"></div>
+      <div class="water"><centre> Inspect the page for result </centre></div>
+      <div class="splash"></div>
+      <div class="splash delay-1"></div>
+      <div class="splash delay-2"></div>
+      <div class="splash splash-4 delay-2"></div>
+      <div class="splash splash-4 delay-3"></div>
+      <div class="splash splash-4 delay-4"></div>
+      <div class="splash splash-stone delay-3"></div>
+      <div class="splash splash-stone splash-4"></div>
+      <div class="splash splash-stone splash-5"></div>
+      <div class="lotus lotus-1"></div>
+      <div class="lotus lotus-2"></div>
+      <div class="lotus lotus-3"></div>
+      <div class="front">
+        <div class="stone"></div>
+        <div class="grass"></div>
+        <div class="grass grass-1"></div>
+        <div class="grass grass-2"></div>
+        <div class="reed"></div>
+        <div class="reed reed-1"></div>
+      </div>
+    </div>
+  </body>
+</html>
